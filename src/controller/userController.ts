@@ -6,28 +6,28 @@ import bcrypt from 'bcrypt'
 
 
 interface SignUpBody {
-        email: string;
+        username: string;
         password: string;
 }
 
 export const signUp: RequestHandler<unknown, unknown, SignUpBody, unknown>= async(req, res, next)=>{
-    const {email, password} = req.body;
+    const {username, password} = req.body;
     try {
           // validate data
-         if(!password || !email){
-             throw createHttpError(400, 'Please provide email and password');
+         if(!password || !username){
+             throw createHttpError(400, 'Please provide username and password');
          }
          if(password.length < 6){
             throw createHttpError(400, 'Password must be at least 6 characters');
          }
-         // check database if it exists
-         const exists = await UserModel.findOne({email}).exec()
+         // check database iff username already exist exists
+         const exists = await UserModel.findOne({username}).exec()
          if(exists){
-             throw createHttpError(400, 'Email already exists');
+             throw createHttpError(400, 'Username already taken');
          }
          // create user
          const user = await UserModel.create({
-            email,
+            username,
             password                   
          })
          await user.save()
@@ -41,11 +41,43 @@ export const signUp: RequestHandler<unknown, unknown, SignUpBody, unknown>= asyn
              secure: true,
            });
            if(user){
-            const {email }= user
-            res.status(201).json({Message: `Welcome to your dashboard ${email}!`  })
+            const {username }= user
+            res.status(201).json({Message: `User successfully created`  })
            }
     }
     catch(error) {
         next(error)
     }
 }
+
+interface loginBody {
+        username: string,
+        password: string,
+}
+export const login:RequestHandler<unknown, unknown, loginBody, unknown> = async (req, res, next)=>{
+        const {username, password} = req.body
+        try{
+           if(!username||!password){
+               throw createHttpError(400, "Username and password are required")
+           }
+           const usernameExists = await UserModel.findOne({username}).select("+password").exec()
+           if(!usernameExists){
+               throw createHttpError(401, "Invalid credentials")
+           }
+           const hashedPassword = usernameExists.password != undefined ? await bcrypt.compare(password, usernameExists.password) : null
+           if(!hashedPassword){
+               throw createHttpError(401, "Invalid Credentials")
+           }
+           const token = createToken(usernameExists._id)
+           res.cookie("token", token, {
+               path: "/",
+               httpOnly: true,
+               expires: new Date(Date.now() + 1000 * 86400), //one day
+               sameSite: "none",
+               secure: true,
+             });
+           res.status(201).json({Message:`Logged in successfully`})
+        }catch(error){
+           next(error)
+        }
+    }
