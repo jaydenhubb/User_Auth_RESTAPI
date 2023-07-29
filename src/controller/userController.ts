@@ -1,9 +1,28 @@
-import {RequestHandler} from 'express'
+import {RequestHandler, Request, Response } from 'express'
 import createHttpError  from 'http-errors'
 import UserModel from '../model/userModel'
 import {createToken} from '../utils/create_jwt_token'
 import bcrypt from 'bcrypt'
 
+
+interface User {
+    username: string;
+    _id: string 
+}
+
+declare global {
+    namespace Express {
+        interface Request {
+            user?: User;
+        }
+    }
+}
+
+
+export const dashboard: RequestHandler  = (req,res ) => {
+    const { username } = req.user as User 
+    res.send(`Welcome to your dashboard ${username}!`)
+}
 
 interface SignUpBody {
         username: string;
