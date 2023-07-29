@@ -24,6 +24,7 @@ export const dashboard: RequestHandler  = (req,res ) => {
     res.send(`Welcome to your dashboard ${username}!`)
 }
 
+// Sign Up 
 interface SignUpBody {
         username: string;
         password: string;
@@ -69,6 +70,8 @@ export const signUp: RequestHandler<unknown, unknown, SignUpBody, unknown>= asyn
     }
 }
 
+
+//Login
 interface loginBody {
         username: string,
         password: string,

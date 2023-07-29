@@ -13,7 +13,7 @@ app.use(cookieParser())
 app.get('/api/home', (req: Request, res:Response )=>{
     res.send("Welcome to my page!")
 })
-app.use('/api', userRoute)
+app.use('/api/users', userRoute)
 
 app.use(errorHandler)
 
