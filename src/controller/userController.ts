@@ -20,9 +20,13 @@ interface User {
 //}
 
 
-export const dashboard: RequestHandler  = (req,res ) => {
-    const { username } = req.user as User 
-    res.send(`Welcome to your dashboard ${username}!`)
+export const dashboard: RequestHandler  = (req,res, next ) => {
+    try{
+        const {username } = req.user as User 
+        res.send(`Welcome to your dashboard ${username}!`)
+    }catch(error){
+        next(error)
+    }
 }
 
 // Sign Up 

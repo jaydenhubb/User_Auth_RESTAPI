@@ -15,14 +15,14 @@ afterEach(async () => {
     })
 
 type user = {
-    email: string,
+    username: string,
     password: string
 }
 const createUser = async (user: user) => {
     return await UserModel.create(user)
 }
 const user = {
-    email: 'user1@gmail.com',
+    username: 'user1@gmail.com',
     password: "password1"
 }
 
@@ -32,7 +32,7 @@ describe("User registeration", () => {
         supertest(app)
             .post('/api/users/signup')
             .send({
-                email: "invalid",
+                username: "invalid",
                 password: "short"
             })
             .then((response) => {
@@ -43,14 +43,14 @@ describe("User registeration", () => {
 
     it("returns 400 status code when email already exists", async () => {
         const existingUser = {
-            email: "existingUser@gmail.com",
+            username : "existingUser@gmail.com",
             password: "password1"
         }
         await createUser(existingUser)
         const res = await supertest(app)
             .post('/api/users/signup')
             .send({
-                email: "existingUser@gmail.com",
+                username: "existingUser@gmail.com",
                 password: "password1"
             })
         expect(res.statusCode).toBe(400)
@@ -93,7 +93,7 @@ describe("User Login", ()=>{
         supertest(app)
             .post('/api/users/login')
             .send({
-                email: "",
+                username: "",
                 passwod: "password1"
              })
             .then((response) => {
@@ -103,14 +103,14 @@ describe("User Login", ()=>{
           })
         it("returns 401 status code when password is incorrect", (done) => {
             const newUser = {
-                email: "user@gmail.com",
-                    password: "password1"
+                username: "user@gmail.com",
+                password: "password1"
             }
             UserModel.create(newUser)
                 supertest(app)
                     .post('/api/users/login')
                     .send({
-                        email: "user@gmail.com",
+                        username: "user@gmail.com",
                         password: "incorrect1"
                     })
                     .then((response) => {

@@ -9,6 +9,11 @@ const app = express()
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser())
+app.use(cors({
+      origin: '*',
+        credentials: true
+        }));
+
 
 app.get('/api/home', (req: Request, res:Response )=>{
     res.send("Welcome to my page!")
