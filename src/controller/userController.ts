@@ -11,15 +11,8 @@ interface User {
     _id: Types.ObjectId 
 }
 
-//declare global {
-   // namespace Express {
-     //   interface Request {
-       //     user?: User;
-       // }
-    //}
-//}
 
-
+//dashboard route 
 export const dashboard: RequestHandler  = (req,res, next ) => {
     try{
         const {username } = req.user as User 
