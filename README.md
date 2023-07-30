@@ -8,9 +8,11 @@ This project is a NodeJS-based RESTful API that provides user registration, logi
 ## Installation 
 
 1. Clone the repository.
-2. Install dependencies using npm.
+2. Install dependencies using npm or yarn.
 
-   >>> npm install
+   #### npm install
+        OR 
+   #### yarn add 
 
 3. Set up your MongoDB connection string, port and jwt secret in a .env file in the project' root directory.
 
@@ -20,7 +22,7 @@ This project is a NodeJS-based RESTful API that provides user registration, logi
 
 4. Start the server.
 
-  ***npm start***
+  ***npm run dev***
 
 ## Endpoints
   * User Registration
@@ -74,7 +76,6 @@ This project is a NodeJS-based RESTful API that provides user registration, logi
       ```
 ## Error Handling
 In case of any issues, the API provides informative error messages:
-
 * 400 Bad Request: When the request body is invalid.
 * 401 Unauthorized: When login credentials are incorrect.
 * 404 Not Found: When accessing an invalid route.
@@ -82,9 +83,13 @@ In case of any issues, the API provides informative error messages:
                 
 ## Authentication Middleware
 The API uses an authentication middleware to verify the provided authentication token for protected routes.
+## Test
+To test the login and signup route 
+  - run ***npm run test***
 
 ## Tech Stack
   * Node.js
   * Express.js
-  * MongoDB (or other NoSQL databases)
+  * MongoDB
+  * Jest and Supertest 
               
