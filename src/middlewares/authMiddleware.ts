@@ -20,7 +20,7 @@ export const protect : RequestHandler = async(req,res,next)=>{
     try{
       const token = req.cookies.token;
       if(!token){
-        throw createHttpError(400,"Unauthorized! Please log in.")
+        throw createHttpError(401,"Unauthorized! Please log in.")
       }
       const verified : JwtPayload   = jwt.verify(token, env.JWT_SECRET) as JwtPayload   ;
       
