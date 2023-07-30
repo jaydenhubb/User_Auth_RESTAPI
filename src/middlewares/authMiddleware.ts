@@ -31,6 +31,6 @@ export const protect : RequestHandler = async(req,res,next)=>{
       req.user = user 
       next()
     }catch(error){
-      throw createHttpError(401, "Not authorized! Please log in ")
+      next(error)
     }
 }
