@@ -13,16 +13,14 @@ This project is a NodeJS-based RESTful API that provides user registration, logi
    >>> npm install
 
 3. Set up your MongoDB connection string, port and jwt secret in a .env file in the project' root directory.
- ***Bold and Italics***
- MONGO_URI = yourmongoconnectionstring
-***Bold and Italics***
- PORT = Your port number
-***Bold and Italics***
- JWT_SECRET= Yourjwtsecret 
 
-Start the server.
+  * **MONGO_URI = yourmongoconnectionstring**
+  * **PORT = Your port number**
+  * **JWT_SECRET= Yourjwtsecret**
 
-  npm start
+4. Start the server.
+
+  ***npm start***
 
 ## Endpoints
   * User Registration
@@ -42,7 +40,7 @@ Start the server.
     }
     ```
   * User Login
-    POST /api/login
+    POST /api/users/login
 
     Request Body:
     ```json
@@ -73,7 +71,7 @@ Start the server.
         {
         "message": "Welcome to your dashboard, [username]!"
         }
-        ```
+      ```
 ## Error Handling
 In case of any issues, the API provides informative error messages:
 
