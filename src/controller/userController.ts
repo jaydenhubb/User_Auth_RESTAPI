@@ -96,6 +96,7 @@ export const login:RequestHandler<unknown, unknown, loginBody, unknown> = async 
                sameSite: "none",
                secure: true,
              });
+             
            res.status(201).json({Message:`Logged in successfully`})
         }catch(error){
            next(error)

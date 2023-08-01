@@ -24,7 +24,7 @@ export const protect : RequestHandler = async(req,res,next)=>{
       }
       const verified : JwtPayload   = jwt.verify(token, env.JWT_SECRET) as JwtPayload   ;
       
-      const user = await UserModel.findById(verified._id).select("-password")
+      const user = await UserModel.findById(verified.id).select("-password")
       if(!user){
         throw createHttpError(404, "User not found")
       }
