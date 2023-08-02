@@ -90,7 +90,7 @@ const login = (req, res, next) => __awaiter(void 0, void 0, void 0, function* ()
             sameSite: "none",
             secure: true,
         });
-        res.status(201).json({ Message: `Logged in successfully` });
+        res.status(200).json({ Message: `Logged in successfully` });
     }
     catch (error) {
         next(error);

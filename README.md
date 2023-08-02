@@ -25,7 +25,7 @@ This project is a NodeJS-based RESTful API that provides user registration, logi
 
 ## Endpoints
   * Home Page 
-    GET /api/home 
+    GET https://user-auth-ccpg.onrender.com/api/home 
 
     Response Body:
     ```json
@@ -33,7 +33,7 @@ This project is a NodeJS-based RESTful API that provides user registration, logi
     ```
 
   * User Registration
-    POST /api/users/signup 
+    POST https://user-auth-ccpg.onrender.com/api/users/signup 
 
     Request Body:
     ```json
@@ -49,7 +49,7 @@ This project is a NodeJS-based RESTful API that provides user registration, logi
     }
     ```
   * User Login
-    POST /api/users/login
+    POST https://user-auth-ccpg.onrender.com/api/users/login
 
     Request Body:
     ```json
@@ -67,7 +67,7 @@ This project is a NodeJS-based RESTful API that provides user registration, logi
     ```
 
   * Protected Route - Dashboard
-    GET /api/users/dashboard
+    GET https://user-auth-ccpg.onrender.com/api/users/dashboard
 
     Request Header:
     ```json
@@ -99,4 +99,8 @@ To test the login and signup route
   * Express.js
   * MongoDB
   * Jest and Supertest 
+
+## Live url
+While testing the live Url using POSTMAN, Insomnia or any other testing tool, after sending each request, response might take a little while. This is because I am using a free tier cloud hosting service. But rest assured you will get a response. 
+
               
